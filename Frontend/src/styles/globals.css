@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --glow: 0 0 0 1px rgba(124, 92, 255, 0.3), 0 8px 32px rgba(124, 92, 255, 0.22);
+  }
+
+  * {
+    @apply border-line;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-base text-ink font-sans antialiased;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow: hidden;
+  }
+
+  ::selection {
+    background: rgba(124, 92, 255, 0.35);
+  }
+
+  /* scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.26);
+  }
+}
+
+@layer components {
+  /* glass surface — reserved for overlays / floating panels */
+  .glass {
+    background: rgba(20, 20, 28, 0.66);
+    backdrop-filter: blur(22px) saturate(140%);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+    border: 1px solid theme("colors.line-hi");
+  }
+
+  /* subtle top inner highlight on raised surfaces */
+  .raised-edge {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      theme("boxShadow.e1");
+  }
+
+  /* animated brand gradient text */
+  .brand-text {
+    background: linear-gradient(135deg, #c9bdff, #9b82ff 40%, #5b5bf0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .grid-bg {
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(124, 92, 255, 0.10), transparent 60%),
+      linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+    background-size: 100% 100%, 44px 44px, 44px 44px;
+  }
+}
+
+/* highlight.js — themed for the violet dark system */
+@layer components {
+  .hljs {
+    color: #d6d6e0;
+    background: transparent;
+  }
+  .hljs-comment,
+  .hljs-quote {
+    color: #6e6e80;
+    font-style: italic;
+  }
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-built_in {
+    color: #9b82ff;
+  }
+  .hljs-string,
+  .hljs-attr {
+    color: #7fdbb6;
+  }
+  .hljs-number,
+  .hljs-literal {
+    color: #f0a868;
+  }
+  .hljs-title,
+  .hljs-function,
+  .hljs-name {
+    color: #82b1ff;
+  }
+  .hljs-attribute,
+  .hljs-variable,
+  .hljs-template-variable {
+    color: #e5a663;
+  }
+  .hljs-type,
+  .hljs-class .hljs-title {
+    color: #c792ea;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
