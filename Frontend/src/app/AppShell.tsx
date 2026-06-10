@@ -6,6 +6,7 @@ import { ChatView } from "@/features/chat/ChatView";
 import { ContextPanel } from "@/features/chat/ContextPanel";
 import { CommandPalette } from "@/features/command-palette/CommandPalette";
 import { SettingsDialog } from "@/features/settings/SettingsDialog";
+import { DemoBanner } from "@/components/DemoBanner";
 
 export function AppShell() {
   const sidebarOpen = useUI((s) => s.sidebarOpen);
@@ -38,7 +39,11 @@ export function AppShell() {
   }, [setCommandOpen, toggleSidebar, toggleContextPanel, setActiveId]);
 
   return (
-    <div className="flex h-[100dvh] w-full overflow-hidden bg-base">
+    <div className="flex h-[100dvh] w-full flex-col overflow-hidden bg-base">
+      {/* ---- Demo banner (only shows when no backend is reachable) ---- */}
+      <DemoBanner />
+
+      <div className="flex min-h-0 w-full flex-1">
       {/* ---- Sidebar (desktop docks, mobile overlays) ---- */}
       <AnimatePresence initial={false}>
         {sidebarOpen && (
@@ -72,6 +77,7 @@ export function AppShell() {
 
       {/* ---- Context panel ---- */}
       <ContextPanel />
+      </div>
 
       {/* ---- Overlays ---- */}
       <CommandPalette />
