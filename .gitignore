@@ -30,3 +30,7 @@ Thumbs.db
 *.tsbuildinfo
 .vite/
 coverage/
+
+# tsc-emitted config artifacts (source is vite.config.ts)
+Frontend/vite.config.js
+Frontend/vite.config.d.ts
