@@ -1,0 +1,27 @@
+# Render Blueprint — deploys the SigmaGPT backend (API + Ollama) as one Docker service.
+# Note: phi3 needs ~4GB RAM, so pick a paid instance type (standard or larger).
+services:
+  - type: web
+    name: sigmagpt-backend
+    runtime: docker
+    dockerfilePath: ./Backend/Dockerfile
+    dockerContext: ./Backend
+    plan: standard
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "8080"
+      - key: DEFAULT_MODEL
+        value: phi3
+      - key: OLLAMA_BASE_URL
+        value: http://localhost:11434
+      - key: MONGODB_URI
+        sync: false # set in dashboard (MongoDB Atlas URI)
+      - key: CORS_ORIGIN
+        sync: false # set in dashboard (your Vercel URL)
+    disk:
+      name: ollama-models
+      mountPath: /root/.ollama
+      sizeGB: 10
